@@ -16,11 +16,11 @@
 	</properties>
 
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/net.sourceforge.javydreamercsw/MySQL-Driver -->
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
-			<groupId>net.sourceforge.javydreamercsw</groupId>
-			<artifactId>MySQL-Driver</artifactId>
-			<version>0.1</version>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.27</version>
 		</dependency>
 
 		<dependency>
