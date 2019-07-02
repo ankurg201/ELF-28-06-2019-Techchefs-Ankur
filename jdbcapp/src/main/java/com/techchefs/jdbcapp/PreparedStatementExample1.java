@@ -2,18 +2,18 @@ package com.techchefs.jdbcapp;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MyFirstJdbcPrograme {
+public class PreparedStatementExample1 {
 	private static final Logger LOGGER = Logger.getLogger("MyFirstJdbcPrograme");
 
 	public static void main(String[] args) {
 		Connection con = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			// 1. load the driver.
@@ -31,13 +31,14 @@ public class MyFirstJdbcPrograme {
 			// 2. get the db connection via driver
 			String dbUrl = "jdbc:mysql://localhost:3306/techchefs_db?user=root&password=admin";
 			// con = DriverManager.getConnection(dbUrl);
-			
+
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/techchefs_db", "root", "admin");
 
 			// 3. issue sql query via connection
-			String query = "select * from employee_info";
-			stmt = con.createStatement();
-			rs = stmt.executeQuery(query);
+			String query = "select * from employee_info where id = ?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, Integer.parseInt(args[0]));
+			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				LOGGER.log(Level.INFO, "ID-> " + rs.getInt("id"));
@@ -54,8 +55,8 @@ public class MyFirstJdbcPrograme {
 				if (con != null) {
 					con.close();
 				}
-				if (stmt != null) {
-					stmt.close();
+				if (pstmt != null) {
+					pstmt.close();
 				}
 				if (rs != null) {
 					rs.close();

@@ -2,19 +2,17 @@ package com.techchefs.jdbcapp;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MyFirstJdbcPrograme {
+public class StatementExample2 {
 	private static final Logger LOGGER = Logger.getLogger("MyFirstJdbcPrograme");
 
 	public static void main(String[] args) {
 		Connection con = null;
 		Statement stmt = null;
-		ResultSet rs = null;
+		int count = 0;
 		try {
 			// 1. load the driver.
 			/*
@@ -31,21 +29,22 @@ public class MyFirstJdbcPrograme {
 			// 2. get the db connection via driver
 			String dbUrl = "jdbc:mysql://localhost:3306/techchefs_db?user=root&password=admin";
 			// con = DriverManager.getConnection(dbUrl);
-			
+
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/techchefs_db", "root", "admin");
 
 			// 3. issue sql query via connection
-			String query = "select * from employee_info";
+			String query = "insert into employee_info (id, name, age, gender, salary, phone, account_number, "
+					+ "email, designation, mngr_id, dept_id) values(8, 'neha', '16', 'female', 2000000, "
+					+ "9567894567, 3245678, 'pooja@gmail.com', 'software engineer', 2, 1)";
+			
 			stmt = con.createStatement();
-			rs = stmt.executeQuery(query);
-
-			while (rs.next()) {
-				LOGGER.log(Level.INFO, "ID-> " + rs.getInt("id"));
-				LOGGER.log(Level.INFO, "NAME-> " + rs.getString("name"));
-				LOGGER.log(Level.INFO, "AGE-> " + rs.getInt("age"));
-				LOGGER.log(Level.INFO, "GENDER-> " + rs.getString("gender"));
-				LOGGER.log(Level.INFO, "====================================");
+			count = stmt.executeUpdate(query);
+			if (count > 0) {
+				LOGGER.info("succesfully inserted " + count + " record");
+			} else {
+				LOGGER.info("insertion failed");
 			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -57,9 +56,7 @@ public class MyFirstJdbcPrograme {
 				if (stmt != null) {
 					stmt.close();
 				}
-				if (rs != null) {
-					rs.close();
-				}
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

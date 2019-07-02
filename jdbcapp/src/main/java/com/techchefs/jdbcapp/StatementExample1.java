@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MyFirstJdbcPrograme {
+public class StatementExample1 {
 	private static final Logger LOGGER = Logger.getLogger("MyFirstJdbcPrograme");
 
 	public static void main(String[] args) {
@@ -35,7 +35,7 @@ public class MyFirstJdbcPrograme {
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/techchefs_db", "root", "admin");
 
 			// 3. issue sql query via connection
-			String query = "select * from employee_info";
+			String query = "select * from employee_info where id = 1";
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(query);
 
