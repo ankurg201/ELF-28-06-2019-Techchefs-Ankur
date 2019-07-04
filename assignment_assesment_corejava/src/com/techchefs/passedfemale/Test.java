@@ -1,8 +1,10 @@
-package com.techchefs.topper;
+package com.techchefs.passedfemale;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+
+import com.techchefs.topper.Student;
 
 public class Test {
 
@@ -14,13 +16,12 @@ public class Test {
 
 		list.add(new Student(70, "female"));
 		list.add(new Student(80, "male"));
+		list.add(new Student(20, "female"));
 		list.add(new Student(40, "female"));
 		list.add(new Student(90, "male"));
 
-		LOGGER.info(list.stream().filter(student -> student.getGender().equalsIgnoreCase("female"))
-				.mapToInt(s -> s.getPercentage()).max().toString());
-
-		LOGGER.info(list.stream().filter(student -> student.getGender().equalsIgnoreCase("male"))
-				.mapToInt(s -> s.getPercentage()).max().toString());
+		LOGGER.info(String.valueOf(list.stream()
+				.filter(student -> student.getGender().equalsIgnoreCase("female") && student.getPercentage() > 30)
+				.count()));
 	}
 }

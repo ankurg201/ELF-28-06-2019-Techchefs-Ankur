@@ -1,4 +1,4 @@
-package com.techchefs.topper;
+package com.techchefs.studentpredicate;
 
 public class Student {
 
