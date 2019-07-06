@@ -9,12 +9,11 @@ public class EmployeeDAOFactory {
 	public static EmployeeDAO getInstance() {
 		EmployeeDAO dao = null;
 		
-		if(dbInteractionType.equals("jdbc")){
+		if(dbInteractionType.equalsIgnoreCase("jdbc")){
 			dao = new EmployeeDAOJDBCImpl();
-		} else if(dbInteractionType.equals("hibernate")){
-			dao = new EmployeeDAOJDBCImpl();
+		} else if(dbInteractionType.equalsIgnoreCase("hibernate")){
+			dao = new EmployeeDAOHibernateImpl();
 		}
-		
 		return dao;
 	}
 }

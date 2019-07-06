@@ -1,0 +1,112 @@
+1.Write a query to display Employee name, his salary along with the designation for all the employee.
+ SELECT NAME, salary, designation FROM techchefs_db.employee_info;
+
+2.Write a query to obtain name and his current salary and new salary with a hike 25 % for all the Employee.
+ SELECT NAME, salary AS currentsalary, salary*0.25 AS newsalary FROM techchefs_db.employee_info;
+
+3.Write a query to display all the details of the Employee who are working as salesman.
+ SELECT * FROM techchefs_db.employee_info WHERE designation='salesman.';
+
+4.Write a query to display all the employees of Dept.no 20.
+ SELECT * FROM techchefs_db.employee_info WHERE dept_id=1;
+
+5.Write a query to display all the Employees DOB before 1994.
+ SELECT * FROM techchefs_db.employee_info WHERE dob<'1994-00-00'
+
+6.Write a query to display all the employees whose annual salary is less than 30,000.
+ SELECT * FROM techchefs_db.employee_info WHERE salary*12<30000;
+
+7.Write a query to display name, salary and Annual salary of all the clerks.
+ SELECT NAME, salary, salary*12 AS annualsalary FROM techchefs_db.employee_info WHERE designation='clerks';
+
+8.Write a query to display all the details of Employee Whoever Hired after Feb of 2013.
+ SELECT * FROM techchefs_db.employee_info WHERE joining_date>'2013-02-00'
+
+9.Write a query to display managers working in deptno 20 only if salary is greater than 2500.
+ SELECT * FROM techchefs_db.employee_info WHERE designation='manager' AND dept_id=20 AND salary>2500;
+
+10.Write a query to display all the employee excluding Analyst.
+ SELECT * FROM techchefs_db.employee_info WHERE designation<>'manager'
+
+11.Write a query to display all the employees excluding salesman who are working in department 30.
+ SELECT * FROM techchefs_db.employee_info WHERE designation<>'salesman' AND dept_id=30;
+
+12.Write a query to display names of all the employee who are working in dept 30 as manager OR all the names of employee who are working as a clerk and salary less than 2000.
+ SELECT name FROM techchefs_db.employee_info WHERE designation='manager' AND dept_id=30 OR designation='clerk' AND salary<2000;
+
+13.Write a query to display all the Employees in dept 20 only if their salary is greater than 1000 and less than 3500, including 1000 & 3500.
+ SELECT * FROM techchefs_db.employee_info WHERE salary BETWEEN 1000 AND 3500 AND dept_id=20;
+
+14.Write a query to display all the details of Employees who are working as clerk in deptno 20,30 or 40.
+ SELECT * FROM techchefs_db.employee_info WHERE designation = 'clerk' AND dept_id IN (20,30, 40);
+
+15.Write a query to display the details of software developer, manager or clerk who are working in dept.  10 or 20 and salary is greater than 1500.
+ SELECT * FROM techchefs_db.employee_info WHERE designation IN ('software developer', 'manager', 'clerk') AND dept_id IN (10,20) AND salary > 1500;
+
+16. Write a query to display all the details of Employees who are working in department 10,20 excluding all the Salesman and Analyst.
+ SELECT * FROM techchefs_db.employee_info WHERE dept_id IN (10,20) AND designation!='Salesman' AND designation!='Analyst'
+
+17. Write a query to display name, Salary for all the Employees who are working in dept 10 or 20 and their annual salary between 20,000 and 40,000 including the limits.
+ SELECT * FROM techchefs_db.employee_info WHERE dept_id IN (10,20) AND salary BETWEEN 20000 AND 40000 LIMIT 2;
+
+18.Write a query to display all the details of employees who were hire in the month of September working in dept 20 or 30.
+ SELECT * FROM techchefs_db.employee_info WHERE dept_id IN (20, 30) AND joining_date LIKE '%-07-%';
+
+19.Write a query to display their name and DOJ of employee who works as salesman or clerk and their names has at least one S or E.
+ SELECT NAME, joining_date FROM techchefs_db.employee_info WHERE NAME LIKE '%S%' OR NAME LIKE '%E%' AND designation IN ('salesman', 'clerk')
+
+20.Write a query to display Average salary and Highest salary of dept. 20.
+ SELECT AVG(salary) AS average_salary, MAX(salary) AS max_salary FROM techchefs_db.employee_info WHERE dept_id=20
+
+21.Write a query to display date of first and last Hired Employees.
+ SELECT max(joining_date), min(joining_date) FROM techchefs_db.employee_info;
+
+22.Write a query to display AVG Salary of Employees by excluding president and manager(job).
+ SELECT AVG(salary) AS average_salary FROM techchefs_db.employee_info WHERE designation<> 'president' AND designation<>'manager';
+
+23.Write a query to display the total salary and average salary of each department
+ SELECT SUM(salary) AS total_salary, AVG(salary) AS avg_salary FROM techchefs_db.employee_info GROUP BY dept_id;
+
+24.Write a query to find the highest and least salary of an Employee in each job by excluding the employees whose name has ‘R’ as the last but one character.
+ SELECT MAX(salary) AS max_salary, MIN(salary) AS min_salary FROM techchefs_db.employee_info WHERE NAME LIKE '%R' GROUP BY designation;
+
+26. Write a query to list the employee whose designation are same as Vikas    or Rahul.
+ SELECT * FROM techchefs_db.employee_info WHERE designation in ( select designation from techchefs_db.employee_info where name in ('vikas', 'rahul'));
+
+27. Write a query to List the employee whose salary is equal to the average of max and minimum.
+ SELECT * FROM techchefs_db.employee_info WHERE salary = ( select avg(max(salary), min(salary))); 
+
+28. Write a query to display employee name, department name and the location of all employee.
+ SELECT name, dept_name, address1 FROM techchefs_db.employee_info inner join techchefs_db.department_info inner join techchefs_db.employee_address_info;
+
+29. Write a query to display all the details of employee whose name begins with the consonants.
+ SELECT * FROM techchefs_db.employee_info where name like '^[a,e,i,o,u]%'
+
+30. Create a Views from Employee_Info table .Views should have all  the record whose salary is greater than 10000.
+
+ CREATE
+    /*[ALGORITHM = {UNDEFINED | MERGE | TEMPTABLE}]
+    [DEFINER = { user | CURRENT_USER }]
+    [SQL SECURITY { DEFINER | INVOKER }]*/
+    VIEW `techchefs_db`.`employee_info_view` 
+    AS
+(SELECT * FROM techchefs_db.employee_info WHERE salary >10000);
+
+31.  Create a trigger which will work before deletion in employee_info table     and create a duplicate copy of the record in another table employee_backup
+ DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    TRIGGER `techchefs_db`.`employee_info_trigger` BEFORE
+    ON `techchefs_db`.`<employee_info>`
+    FOR EACH ROW BEGIN
+	INSERT INTO employee_info_backup;
+    END$$
+
+DELIMITER ;
+
+32.What is Driver Class?
+ Ans- driver class is interface provided by db vendor to connect jdbc api to particular database.
+33.What is DB URL?
+ Ans- db url is used to connect specific database in server. it containing host name port no and database name user name password.
+
