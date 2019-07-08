@@ -15,7 +15,7 @@ public class SaveDemo {
 	
 	public static void main(String[] args) {
 		
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = HibernateUtil.openSession();
 		
 		EmployeeInfoBean employeeInfoBean = new EmployeeInfoBean();
 		employeeInfoBean.setId(15);
@@ -26,7 +26,7 @@ public class SaveDemo {
 		employeeInfoBean.setGender("male");
 		employeeInfoBean.setJoiningDate(new Date());
 		employeeInfoBean.setMngrId(1);
-		employeeInfoBean.setSalary(30000000);
+		employeeInfoBean.setSalary(30000.00);
 		SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-DD");
 		try {
 			employeeInfoBean.setDob(formatter.parse("1997-11-21"));

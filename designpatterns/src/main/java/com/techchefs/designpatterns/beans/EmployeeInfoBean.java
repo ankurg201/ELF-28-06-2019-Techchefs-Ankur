@@ -15,30 +15,35 @@ import lombok.Data;
 @Table(name = "employee_info")
 public class EmployeeInfoBean implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name = "id")
-	private int id;
+	private Integer id;
 
 	@Column(name = "dept_id")
-	private int deptId;
+	private Integer deptId;
 
 	@Column(name = "name")
 	private String name;
 
 	@Column(name = "age")
-	private int age;
+	private Integer age;
 
 	@Column(name = "dob")
 	private Date dob;
 
 	@Column(name = "account_number")
-	private long accountNumber;
+	private Long accountNumber;
 
 	@Column(name = "designation")
 	private String designation;
 
 	@Column(name = "phone")
-	private long phone;
+	private Long phone;
 
 	@Column(name = "email")
 	private String email;
@@ -47,27 +52,27 @@ public class EmployeeInfoBean implements Serializable {
 	private String gender;
 
 	@Column(name = "salary")
-	private double salary;
+	private Double salary;
 
 	@Column(name = "joining_date")
 	private Date joiningDate;
 
 	@Column(name = "mngr_id")
-	private int mngrId;
+	private Integer mngrId;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public int getDeptId() {
+	public Integer getDeptId() {
 		return deptId;
 	}
 
-	public void setDeptId(int deptId) {
+	public void setDeptId(Integer deptId) {
 		this.deptId = deptId;
 	}
 
@@ -79,11 +84,11 @@ public class EmployeeInfoBean implements Serializable {
 		this.name = name;
 	}
 
-	public int getAge() {
+	public Integer getAge() {
 		return age;
 	}
 
-	public void setAge(int age) {
+	public void setAge(Integer age) {
 		this.age = age;
 	}
 
@@ -95,11 +100,11 @@ public class EmployeeInfoBean implements Serializable {
 		this.dob = dob;
 	}
 
-	public long getAccountNumber() {
+	public Long getAccountNumber() {
 		return accountNumber;
 	}
 
-	public void setAccountNumber(long accountNumber) {
+	public void setAccountNumber(Long accountNumber) {
 		this.accountNumber = accountNumber;
 	}
 
@@ -111,11 +116,11 @@ public class EmployeeInfoBean implements Serializable {
 		this.designation = designation;
 	}
 
-	public long getPhone() {
+	public Long getPhone() {
 		return phone;
 	}
 
-	public void setPhone(long phone) {
+	public void setPhone(Long phone) {
 		this.phone = phone;
 	}
 
@@ -135,11 +140,11 @@ public class EmployeeInfoBean implements Serializable {
 		this.gender = gender;
 	}
 
-	public double getSalary() {
+	public Double getSalary() {
 		return salary;
 	}
 
-	public void setSalary(double salary) {
+	public void setSalary(Double salary) {
 		this.salary = salary;
 	}
 
@@ -151,11 +156,11 @@ public class EmployeeInfoBean implements Serializable {
 		this.joiningDate = joiningDate;
 	}
 
-	public int getMngrId() {
+	public Integer getMngrId() {
 		return mngrId;
 	}
 
-	public void setMngrId(int mngrId) {
+	public void setMngrId(Integer mngrId) {
 		this.mngrId = mngrId;
 	}
 }

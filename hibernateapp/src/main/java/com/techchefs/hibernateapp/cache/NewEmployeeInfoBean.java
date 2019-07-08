@@ -1,15 +1,21 @@
-package com.techchefs.hibernateapp.dto;
+package com.techchefs.hibernateapp.cache;
 
 import java.util.Date;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
 @Table(name = "employee_info")
-public class EmployeeInfoBean {
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+public class NewEmployeeInfoBean {
 
 	@Id
 	@Column(name = "id")

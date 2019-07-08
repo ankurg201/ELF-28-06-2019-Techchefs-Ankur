@@ -1,24 +1,31 @@
 package com.techchefs.hibernateapp.util;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import com.techchefs.hibernateapp.dto.DepartmentInfoBean;
 import com.techchefs.hibernateapp.dto.EmployeeInfoBean;
 
 public class HibernateUtil {
-	
-	private static SessionFactory factory = null;
-	
-	private HibernateUtil() {}
-	
-	static {
-		Configuration cfg = new Configuration();
-		cfg.configure("hibernate.cfg.xml");
-		cfg.addAnnotatedClass(EmployeeInfoBean.class);
-		factory = cfg.buildSessionFactory();
+
+	private static SessionFactory sessionFactory = null;
+
+	private static SessionFactory buildSessionFactory() {
+		return new Configuration().configure().addAnnotatedClass(EmployeeInfoBean.class).buildSessionFactory();
 	}
-	
-	public static SessionFactory getSessionFactory(){
-		return factory;
+
+	private HibernateUtil() {
+	}
+
+	private static SessionFactory getSessionFactory() {
+		if (sessionFactory == null) {
+			sessionFactory = buildSessionFactory();
+		}
+		return sessionFactory;
+	}
+
+	public static Session openSession() {
+		return getSessionFactory().openSession();
 	}
 }
