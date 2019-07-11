@@ -1,4 +1,4 @@
-package com.techchefs.hibernateapp.dto;
+package com.techchefs.mywebapp.beans;
 
 import java.io.Serializable;
 
@@ -7,31 +7,22 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "department_info")
 public class DepartmentInfoBean implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 857411351457373236L;
+
 	@Id
 	@Column(name = "dept_id")
 	private int deptId;
 	
 	@Column(name = "dept_name")
 	private String deptName;
-
-	public int getDeptId() {
-		return deptId;
-	}
-
-	public void setDeptId(int deptId) {
-		this.deptId = deptId;
-	}
-
-	public String getDeptName() {
-		return deptName;
-	}
-
-	public void setDeptName(String deptName) {
-		this.deptName = deptName;
-	}
-
 }

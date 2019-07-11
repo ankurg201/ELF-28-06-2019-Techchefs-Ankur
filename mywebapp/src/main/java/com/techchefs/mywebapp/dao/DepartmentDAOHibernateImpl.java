@@ -6,46 +6,47 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import com.techchefs.mywebapp.beans.DepartmentInfoBean;
 import com.techchefs.mywebapp.beans.EmployeeInfoBean;
 import com.techchefs.mywebapp.util.HibernateUtil;
 
-public class EmployeeDAOHibernateImpl implements EmployeeDAO {
+public class DepartmentDAOHibernateImpl implements DepartmentDAO {
 
 	@Override
-	public List<EmployeeInfoBean> getAllEmployeeInfo() {
+	public List<DepartmentInfoBean> getAllDepartmentInfo() {
 		Session session = HibernateUtil.openSession();
-		String hql = "from EmployeeInfoBean";
+		String hql = "from DepartmentInfoBean";
 		Query query = session.createQuery(hql);
 		return query.list();
 	}
 
 	@Override
-	public EmployeeInfoBean getEmployeeInfo(String id) {
+	public DepartmentInfoBean getDepartmentInfo(String id) {
 		Session session = HibernateUtil.openSession();
-		return session.get(EmployeeInfoBean.class, Integer.parseInt(id));
+		return session.get(DepartmentInfoBean.class, Integer.parseInt(id));
 	}
 
 	@Override
-	public EmployeeInfoBean getEmployeeInfo(int id) {
+	public DepartmentInfoBean getDepartmentInfo(int id) {
 		Session session = HibernateUtil.openSession();
-		return session.get(EmployeeInfoBean.class, id);
+		return session.get(DepartmentInfoBean.class, id);
 	}
 
 	@Override
-	public boolean createEmployeeInfo(EmployeeInfoBean bean) {
+	public boolean createDepartmentInfo(DepartmentInfoBean bean) {
 		return saveOrUpdate(bean);
 	}
 
 	@Override
-	public boolean updateEmployeeInfo(EmployeeInfoBean bean) {
+	public boolean updateDepartmentInfo(DepartmentInfoBean bean) {
 		return saveOrUpdate(bean);
 	}
 
 	@Override
-	public boolean deleteEmployeeIfo(int id) {
+	public boolean deleteDepartmentInfo(int id) {
 		Transaction txn = null;
-		EmployeeInfoBean bean = new EmployeeInfoBean();
-		bean.setId(id);
+		DepartmentInfoBean bean = new DepartmentInfoBean();
+		bean.setDeptId(id);
 
 		try {
 			Session session = HibernateUtil.openSession();
@@ -61,12 +62,12 @@ public class EmployeeDAOHibernateImpl implements EmployeeDAO {
 	}
 
 	@Override
-	public boolean deleteEmployeeIfo(String id) {
-		deleteEmployeeIfo(Integer.parseInt(id));
+	public boolean deleteDepartmentInfo(String id) {
+		deleteDepartmentInfo(Integer.parseInt(id));
 		return false;
 	}
 
-	private boolean saveOrUpdate(EmployeeInfoBean bean) {
+	private boolean saveOrUpdate(DepartmentInfoBean bean) {
 		Transaction txn = null;
 		try {
 			Session session = HibernateUtil.openSession();

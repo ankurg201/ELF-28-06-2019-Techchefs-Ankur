@@ -1,18 +1,18 @@
 package com.techchefs.mywebapp.dao;
 
-public class EmployeeDAOFactory {
+public class DepartmentDAOFactory {
 
 	private static String dbInteractionType = "hibernate";
 	
-	private EmployeeDAOFactory() {}
+	private DepartmentDAOFactory() {}
 
-	public static EmployeeDAO getInstance() {
-		EmployeeDAO dao = null;
+	public static DepartmentDAO getInstance() {
+		DepartmentDAO dao = null;
 		
 		if(dbInteractionType.equalsIgnoreCase("jdbc")){
-			dao = new EmployeeDAOJDBCImpl();
+			dao = new DepartmentDAOJDBCImpl();
 		} else if(dbInteractionType.equalsIgnoreCase("hibernate")){
-			dao = new EmployeeDAOHibernateImpl();
+			dao = new DepartmentDAOHibernateImpl();
 		}
 		return dao;
 	}

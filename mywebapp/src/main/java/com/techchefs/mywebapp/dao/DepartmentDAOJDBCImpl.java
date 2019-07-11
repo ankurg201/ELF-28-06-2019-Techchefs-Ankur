@@ -10,13 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import com.techchefs.mywebapp.beans.DepartmentInfoBean;
 import com.techchefs.mywebapp.beans.EmployeeInfoBean;
 
-public class EmployeeDAOJDBCImpl implements EmployeeDAO{
+public class DepartmentDAOJDBCImpl implements DepartmentDAO{
 	private static final Logger LOGGER = Logger.getLogger("EmployeeDAO");
 
-	public List<EmployeeInfoBean> getAllEmployeeInfo() {
-		String query = "select * from employee_info";
+	public List<DepartmentInfoBean> getAllDepartmentInfo() {
+		String query = "select * from department_info";
 		String dbUrl = "jdbc:mysql://localhost:3306/techchefs_db";
 
 		try (Connection con = DriverManager.getConnection(dbUrl, "root", "admin");
@@ -25,15 +26,11 @@ public class EmployeeDAOJDBCImpl implements EmployeeDAO{
 
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 
-			List<EmployeeInfoBean> beans = new ArrayList<EmployeeInfoBean>();
+			List<DepartmentInfoBean> beans = new ArrayList<DepartmentInfoBean>();
 			while (rs.next()) {
-				EmployeeInfoBean bean = new EmployeeInfoBean();
-				bean.setId(rs.getInt("id"));
-				bean.setName(rs.getString("name"));
-				bean.setAge(rs.getInt("age"));
-				bean.setGender(rs.getString("gender"));
-				bean.setAccountNumber(rs.getLong("account_number"));
-
+				DepartmentInfoBean bean = new DepartmentInfoBean();
+				bean.setDeptId(rs.getInt("id"));
+				bean.setDeptName(rs.getString("name"));
 				beans.add(bean);
 			}
 			return beans;
@@ -43,17 +40,17 @@ public class EmployeeDAOJDBCImpl implements EmployeeDAO{
 		}
 	}
 
-	public EmployeeInfoBean getEmployeeInfo(String id) {
-		EmployeeInfoBean bean = null;
+	public DepartmentInfoBean getDepartmentInfo(String id) {
+		DepartmentInfoBean bean = null;
 		try {
-			bean = getEmployeeInfo(Integer.parseInt(id));
+			bean = getDepartmentInfo(Integer.parseInt(id));
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
 		return bean;
 	}
 
-	public EmployeeInfoBean getEmployeeInfo(int id) {
+	public DepartmentInfoBean getDepartmentInfo(int id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -70,13 +67,10 @@ public class EmployeeDAOJDBCImpl implements EmployeeDAO{
 			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery();
 
-			EmployeeInfoBean bean = new EmployeeInfoBean();
+			DepartmentInfoBean bean = new DepartmentInfoBean();
 			while (rs.next()) {
-				bean.setId(rs.getInt("id"));
-				bean.setName(rs.getString("name"));
-				bean.setAge(rs.getInt("age"));
-				bean.setGender(rs.getString("gender"));
-				bean.setAccountNumber(rs.getLong("account_number"));
+				bean.setDeptId(rs.getInt("id"));
+				bean.setDeptName(rs.getString("name"));
 			}
 			return bean;
 		} catch (SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException e) {
@@ -100,25 +94,25 @@ public class EmployeeDAOJDBCImpl implements EmployeeDAO{
 	}
 
 	@Override
-	public boolean createEmployeeInfo(EmployeeInfoBean bean) {
+	public boolean createDepartmentInfo(DepartmentInfoBean bean) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean updateEmployeeInfo(EmployeeInfoBean bean) {
+	public boolean updateDepartmentInfo(DepartmentInfoBean bean) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean deleteEmployeeIfo(int id) {
+	public boolean deleteDepartmentInfo(int id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean deleteEmployeeIfo(String id) {
+	public boolean deleteDepartmentInfo(String id) {
 		// TODO Auto-generated method stub
 		return false;
 	}

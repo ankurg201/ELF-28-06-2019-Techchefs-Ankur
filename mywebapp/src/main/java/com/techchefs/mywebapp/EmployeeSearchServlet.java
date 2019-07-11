@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.techchefs.designpatterns.beans.EmployeeInfoBean;
-import com.techchefs.designpatterns.dao.EmployeeDAO;
-import com.techchefs.designpatterns.dao.EmployeeDAOFactory;
+import com.techchefs.mywebapp.beans.EmployeeInfoBean;
+import com.techchefs.mywebapp.dao.EmployeeDAO;
+import com.techchefs.mywebapp.dao.EmployeeDAOFactory;
 
 @WebServlet("/search")
 public class EmployeeSearchServlet extends HttpServlet {

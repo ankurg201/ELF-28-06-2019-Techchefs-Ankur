@@ -1,8 +1,8 @@
-package com.techchefs.designpatterns.dao;
+package com.techchefs.mywebapp.dao;
 
 import java.util.List;
 
-import com.techchefs.designpatterns.beans.EmployeeInfoBean;
+import com.techchefs.mywebapp.beans.EmployeeInfoBean;
 
 
 public interface EmployeeDAO {

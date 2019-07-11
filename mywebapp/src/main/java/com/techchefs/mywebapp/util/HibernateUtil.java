@@ -1,17 +1,19 @@
-package com.techchefs.hibernateapp.util;
+package com.techchefs.mywebapp.util;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import com.techchefs.designpatterns.beans.EmployeeInfoBean;
+import com.techchefs.mywebapp.beans.DepartmentInfoBean;
+import com.techchefs.mywebapp.beans.EmployeeInfoBean;
 
 public class HibernateUtil {
 
 	private static SessionFactory sessionFactory = null;
 
 	private static SessionFactory buildSessionFactory() {
-		return new Configuration().configure().addAnnotatedClass(EmployeeInfoBean.class).buildSessionFactory();
+		return new Configuration().configure().addAnnotatedClass(EmployeeInfoBean.class)
+				.addAnnotatedClass(DepartmentInfoBean.class).buildSessionFactory();
 	}
 
 	private HibernateUtil() {
