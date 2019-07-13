@@ -1,0 +1,18 @@
+.demo{
+    color:red
+}
+#name{
+    color:green
+}
+#age{
+    font-size: 30px;
+}
+.button{
+    color: green;
+}
+.button1{
+    font-size: 40px;
+}
+.blue{
+    font-family: 'Courier New', Courier, monospace;
+}
