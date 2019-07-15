@@ -4,7 +4,7 @@ console.log(s);
 // var b=a;
 console.log(b);
 b=20;
-// console.log(a); */
+// console.log(a);
 
 console.log("=========================");
 
@@ -81,7 +81,7 @@ for(var index in person){
 }
 console.timeEnd("forin");
 
-/* function alertMessage(val, number){
+function alertMessage(val, number){
     alert(`this is named function value = ${val} number= ${number}`);
 }
 
@@ -95,7 +95,7 @@ alertMessage(10, 30);
 // ‘Immediately Invoked Function Expression
 (function(){
     alert("this is IIFE1111");
-})(); */
+})();
 
 console.log("=========================");
 
@@ -188,4 +188,27 @@ let filteredValue = items.filter((value)=>{
 
 console.log(filteredValue);
 
-console.log("=========================");
+console.log("========================="); */
+
+var john = {
+    name: 'john',
+    age: 25,
+    presentation: function (style, message) {
+        if (style == 'formal') {
+            console.log("hi " + this.name + ' good ' + message);
+        } else {
+            console.log('Hey ' + this.name + ' ' + message);
+        }
+    }
+};
+john.presentation('formal', 'morning');
+var mike = {
+    name: 'mike',
+    age: 26,
+};
+
+john.presentation.call(mike, 'friendly', 'evening');
+john.presentation.apply(john, ['friendly', 'evening']);
+
+var johnFormal = john.presentation.bind(mike,'formal');
+johnFormal('night');

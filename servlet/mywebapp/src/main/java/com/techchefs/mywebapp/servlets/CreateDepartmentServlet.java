@@ -1,4 +1,4 @@
-package com.techchefs.mywebapp;
+package com.techchefs.mywebapp.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
