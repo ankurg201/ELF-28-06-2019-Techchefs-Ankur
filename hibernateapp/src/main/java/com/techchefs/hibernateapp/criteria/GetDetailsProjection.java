@@ -8,7 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
-import com.techchefs.hibernateapp.dto.EmployeeInfoBean;
+
+import com.techchefs.hibernateapp.onetoone.EmployeeInfoBean;
 import com.techchefs.hibernateapp.util.HibernateUtil;
 
 public class GetDetailsProjection {

@@ -1,25 +1,19 @@
-package com.techchefs.hibernateapp;
+package com.techchefs.hibernateapp.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
 import com.techchefs.hibernateapp.onetoone.EmployeeInfoBean;
-import com.techchefs.hibernateapp.util.HibernateUtil;
+import com.techchefs.hibernateapp.onetoone.EmployeeOtherInfoBean;
 
+public class PrepareDataUtil {
 
-public class SaveDemo {
+	private PrepareDataUtil() {}
 	
-	public static void main(String[] args) {
-		
-		Session session = HibernateUtil.openSession();
-		
+	public static EmployeeInfoBean prepareData(int id) {
 		EmployeeInfoBean employeeInfoBean = new EmployeeInfoBean();
-		employeeInfoBean.setId(15);
+		employeeInfoBean.setId(id);
 		employeeInfoBean.setName("bhupindra");
 		employeeInfoBean.setAge(32);
 		employeeInfoBean.setDesignation("project manager");
@@ -35,9 +29,17 @@ public class SaveDemo {
 			e.printStackTrace();
 		}
 		
-		Transaction transaction = session.beginTransaction();
-		session.saveOrUpdate(employeeInfoBean);
-		transaction.commit();
+		EmployeeOtherInfoBean otherInfo = new EmployeeOtherInfoBean();
+		otherInfo.setAadhar(2345);
+		otherInfo.setId(id);
+		otherInfo.setBloodGroup("AB+");
+		otherInfo.setFatherName("LC gupta");
+		otherInfo.setChallanged(false);
+		otherInfo.setEmergencyContactName("ankur");
+		otherInfo.setEmergencyContactNum(9876543218L);
+		otherInfo.setIsmarried(true);
+		otherInfo.setMotherName("sarala gupta");
+		employeeInfoBean.setOtherInfo(otherInfo);
+		return employeeInfoBean;
 	}
-
 }

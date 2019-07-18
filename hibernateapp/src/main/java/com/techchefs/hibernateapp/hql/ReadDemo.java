@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import com.techchefs.hibernateapp.dto.EmployeeInfoBean;
+import com.techchefs.hibernateapp.onetoone.EmployeeInfoBean;
 import com.techchefs.hibernateapp.util.HibernateUtil;
 
 public class ReadDemo {

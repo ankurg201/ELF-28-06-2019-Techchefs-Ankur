@@ -5,7 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import com.techchefs.hibernateapp.dto.EmployeeInfoBean;
+import com.techchefs.hibernateapp.onetoone.EmployeeInfoBean;
 
 public class DeleteRecord {
 

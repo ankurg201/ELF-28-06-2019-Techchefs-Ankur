@@ -6,7 +6,7 @@ import javax.persistence.StoredProcedureQuery;
 
 import org.hibernate.Session;
 
-import com.techchefs.hibernateapp.dto.EmployeeInfoBean;
+import com.techchefs.hibernateapp.onetoone.EmployeeInfoBean;
 import com.techchefs.hibernateapp.util.HibernateUtil;
 
 public class CallingStoreProcedure {

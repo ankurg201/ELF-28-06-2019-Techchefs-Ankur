@@ -1,4 +1,4 @@
-package com.techchefs.designpatterns.beans;
+package com.techchefs.emp.beans;
 
 import java.io.Serializable;
 import java.util.Date;

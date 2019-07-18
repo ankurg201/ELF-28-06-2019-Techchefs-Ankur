@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.techchefs.mywebapp.beans.EmployeeInfoBean;
+
 public class MyFirstServlet extends HttpServlet {
 
 	public static void main(String[] args) {
@@ -50,5 +52,30 @@ public class MyFirstServlet extends HttpServlet {
 		pw.println("</body></html>");
 
 		pw.close();// closing the stream
+
+		
+		// EmployeeInfoBean empInfo = (EmployeeInfoBean) req.getAttribute("info");
+		EmployeeInfoBean empInfo = (EmployeeInfoBean) ctx.getAttribute("info");
+		PrintWriter out = res.getWriter();
+		if (empInfo == null) {
+			out.println("<HTML>");
+			out.println("<BODY>");
+			out.println("<H1><span style=\"color: green\"> Employeeinfo bean not Found... </span>");
+			out.println("</BODY>");
+			out.println("</HTML>");
+		} else {
+			out.println("<HTML>");
+			out.println("<BODY>");
+			out.println("<H2><span style=\"color: green\"> Employee Found... </span>");
+			out.println("<BR>");
+			out.println("<BR> ID : " + empInfo.getId());
+			out.println("<BR> name : " + empInfo.getName());
+			out.println("<BR> email : " + empInfo.getEmail());
+			out.println("<BR> account no : " + empInfo.getPhone());
+			out.println("<BR>" + movieName + " " + actorName);
+			out.println("</BODY>");
+			out.println("</HTML>");
+		}
+
 	}
 }

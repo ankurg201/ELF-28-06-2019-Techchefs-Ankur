@@ -18,8 +18,7 @@ public class PetConfig {
 	}
 	
 	@Bean(name="monkey")
-	public Animal getMonkey
-	() {
+	public Animal getMonkey() {
 		return new Monkey();
 	}
 	
