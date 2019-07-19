@@ -16,20 +16,22 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<a href="/emp/profile"> <img alt="profile" src="profile.png"
 					width="30px" height="30px"></a>
 			</div>
 
-			<div class="col-md-4">
-				<div class="form-group">
-					<form action="/emp/search">
-						<input type="text" class="form-control" id="empId" name="empId" placeholder="search here...">
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</form>
-				</div>
+			<div class="col-md-3 form-group pr-0">
+				<form action="/emp/search">
+					<input type="text" class="form-control" id="empId" name="empId"
+						placeholder="search here...">
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-3 pl-0">
+				<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+
+			</div>
+			<div class="col-md-3">
 				<a href="/emp/logout">logout</a>
 			</div>
 		</div>
