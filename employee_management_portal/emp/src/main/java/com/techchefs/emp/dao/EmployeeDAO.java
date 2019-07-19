@@ -10,6 +10,8 @@ public interface EmployeeDAO {
 	List<EmployeeInfoBean> getAllEmployeeInfo();
 
 	EmployeeInfoBean getEmployeeInfo(String id);
+	
+	List<EmployeeInfoBean> getEmployeesInfo(String id, String record);
 
 	EmployeeInfoBean getEmployeeInfo(int id);
 	

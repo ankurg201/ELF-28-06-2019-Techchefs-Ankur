@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.techchefs.emp.beans.EmployeeInfoBean;
 import com.techchefs.emp.dao.EmployeeDAO;
@@ -24,11 +25,15 @@ public class LoginServlet extends HttpServlet {
 		EmployeeDAO employeeDAO = EmployeeDAOFactory.getInstance();
 		EmployeeInfoBean empBean = employeeDAO.getEmployeeInfo(empId);
 
-		if (empBean.getPassword().equals(password)) {
-			String url = "/employeesearch.html";
-			req.setAttribute("empInfo", empBean);
-			RequestDispatcher dispatcher = req.getRequestDispatcher(url);
-			dispatcher.forward(req, resp);
+		String url = null;
+		if (empBean != null && empBean.getPassword().equals(password)) {
+			HttpSession session = req.getSession();
+			url = "/home.html";
+			session.setAttribute("empInfo", empBean);
+		} else {
+			url = "/login.html";
 		}
+		RequestDispatcher dispatcher = req.getRequestDispatcher(url);
+		dispatcher.forward(req, resp);
 	}
 }

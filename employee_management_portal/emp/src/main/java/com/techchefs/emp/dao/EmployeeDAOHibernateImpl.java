@@ -80,4 +80,18 @@ public class EmployeeDAOHibernateImpl implements EmployeeDAO {
 			return false;
 		}
 	}
+
+	@Override
+	public List<EmployeeInfoBean> getEmployeesInfo(String id, String record) {
+		Session session = HibernateUtil.openSession();
+		String hql = "from EmployeeInfoBean where str(id) like :id";
+		Query query = session.createQuery(hql);
+		if (record == null) {
+			query.setParameter("id", id + "%");
+		} else {
+			query.setParameter("id", id);
+		}
+		List<EmployeeInfoBean> empList = query.list();
+		return empList;
+	}
 }
