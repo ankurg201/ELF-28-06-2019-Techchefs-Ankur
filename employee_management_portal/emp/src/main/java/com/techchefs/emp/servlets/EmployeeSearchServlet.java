@@ -27,6 +27,8 @@ public class EmployeeSearchServlet extends HttpServlet {
 
 		EmployeeDAO dao = EmployeeDAOFactory.getInstance();
 		List<EmployeeInfoBean> beans = dao.getEmployeesInfo(idValue, record);
+		
+		// req.setAttribute("emps", beans);
 
 		PrintWriter out = resp.getWriter();
 

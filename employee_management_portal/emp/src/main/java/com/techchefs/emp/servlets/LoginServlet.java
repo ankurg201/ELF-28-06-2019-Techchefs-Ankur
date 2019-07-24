@@ -28,10 +28,11 @@ public class LoginServlet extends HttpServlet {
 		String url = null;
 		if (empBean != null && empBean.getPassword().equals(password)) {
 			HttpSession session = req.getSession();
-			url = "/home.html";
+			url = "/home.jsp";
 			session.setAttribute("empInfo", empBean);
 		} else {
-			url = "/login.html";
+			req.setAttribute("errorMsg", "Invalid Credential");
+			url = "/login.jsp";
 		}
 		RequestDispatcher dispatcher = req.getRequestDispatcher(url);
 		dispatcher.forward(req, resp);

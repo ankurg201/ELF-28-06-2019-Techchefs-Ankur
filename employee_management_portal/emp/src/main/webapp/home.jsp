@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="com.techchefs.emp.beans.EmployeeInfoBean"%>
 <html lang="en">
 <head>
 <title>Bootstrap Example</title>
@@ -34,12 +35,35 @@
 			<div class="col-md-3">
 				<a href="/emp/logout">logout</a>
 			</div>
-		
 		</div>
 		<hr>
-		<div class = "row">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<h5>Employee information</h5>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<h6>Personal Information</h6>
+				<%
+					EmployeeInfoBean empBean = (EmployeeInfoBean) session.getAttribute("empInfo");
+				%>
+				Id =
+				<%=empBean.getId()%></br> Name =
+				<%=empBean.getName()%></br> Phone =
+				<%=empBean.getPhone()%></br> A/C number =
+				<%=empBean.getAccountNumber()%></br> Age =
+				<%=empBean.getAge()%></br> Designation =
+				<%=empBean.getDesignation()%></br>
+			</div>
+			<div class="col-md-4">
+				<h5>Other Information</h5>
 
+			</div>
+			<div class="col-md-4">
+				<h5>training Information</h5>
+
+			</div>
 		</div>
 	</div>
-	
 </body>
