@@ -45,21 +45,13 @@
 		<div class="row">
 			<div class="col-md-4">
 				<h6>Personal Information</h6>
-				<%
-					EmployeeInfoBean empBean = null;
-					if (request.getAttribute("empInfo") == null) {
-						empBean = (EmployeeInfoBean) session.getAttribute("empInfo");
-					} else {
-						empBean = (EmployeeInfoBean) request.getAttribute("empInfo");
-					}
-				%>
-				Id =
-				<%=empBean.getId()%></br> Name =
-				<%=empBean.getName()%></br> Phone =
-				<%=empBean.getPhone()%></br> A/C number =
-				<%=empBean.getAccountNumber()%></br> Age =
-				<%=empBean.getAge()%></br> Designation =
-				<%=empBean.getDesignation()%></br>
+				
+				${empBean.id} <br>
+				${empBean.name }<br>
+				${empBean.accountNumber} <br>
+				${empBean.designation }<br>
+				${empBean.phone} <br>
+				${empBean.age }<br>
 			</div>
 			<div class="col-md-4">
 				<h5>Other Information</h5>

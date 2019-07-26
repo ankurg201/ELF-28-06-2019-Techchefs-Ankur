@@ -5,13 +5,15 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import com.techchefs.emp.beans.EmployeeInfoBean;
+import com.techchefs.emp.beans.EmployeeOtherInfoBean;
 
 public class HibernateUtil {
 
 	private static SessionFactory sessionFactory = null;
 
 	private static SessionFactory buildSessionFactory() {
-		return new Configuration().configure().addAnnotatedClass(EmployeeInfoBean.class).buildSessionFactory();
+		return new Configuration().configure().addAnnotatedClass(EmployeeInfoBean.class)
+				.addAnnotatedClass(EmployeeOtherInfoBean.class).buildSessionFactory();
 	}
 
 	private HibernateUtil() {

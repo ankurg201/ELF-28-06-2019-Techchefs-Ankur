@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="java.util.List"%>
 <%@page import="com.techchefs.emp.beans.EmployeeInfoBean"%>
 <html lang="en">
 <head>
@@ -39,35 +40,17 @@
 		<hr>
 		<div class="row">
 			<div class="col-md-12 text-center">
-				<h5>Employee information</h5>
+				<h5>Employee Ids match</h5>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-4">
-				<h6>Personal Information</h6>
 				<%
-					EmployeeInfoBean empBean = null;
-					if (request.getAttribute("empInfo") == null) {
-						empBean = (EmployeeInfoBean) session.getAttribute("empInfo");
-					} else {
-						empBean = (EmployeeInfoBean) request.getAttribute("empInfo");
-					}
+					List<EmployeeInfoBean> empList = (List<EmployeeInfoBean>) request.getAttribute("empList");
+					for(EmployeeInfoBean bean : empList){ %>
+					<a href = '/emp/employee?empId=" + bean.getId()'><%= bean.getId() %> <BR> <BR></a>
+				<%	}
 				%>
-				Id =
-				<%=empBean.getId()%></br> Name =
-				<%=empBean.getName()%></br> Phone =
-				<%=empBean.getPhone()%></br> A/C number =
-				<%=empBean.getAccountNumber()%></br> Age =
-				<%=empBean.getAge()%></br> Designation =
-				<%=empBean.getDesignation()%></br>
-			</div>
-			<div class="col-md-4">
-				<h5>Other Information</h5>
-
-			</div>
-			<div class="col-md-4">
-				<h5>training Information</h5>
-
 			</div>
 		</div>
 	</div>

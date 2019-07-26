@@ -29,17 +29,11 @@
 
 					<div class="row">
 						<div class="col-md-6 offset-3 text-center">
-							<%
-								String msg = (String) request.getAttribute("errorMsg");
-								if (msg != null) {
-							%>
-							<%=msg%>
-							<%
-								}
-							%>
+							
+							${msg }
 						</div>
 					</div>
-					<form action="login/dologin" method="post">
+					<form action="./dologin" method="post">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="row">

@@ -1,4 +1,4 @@
-package com.techchefs.emp.beans;
+package com.techchefs.emp.dto;
 
 import java.io.Serializable;
 import java.util.Date;

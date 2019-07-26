@@ -75,7 +75,9 @@ public class EmployeeDAOHibernateImpl implements EmployeeDAO {
 			txn.commit();
 			return true;
 		} catch (Exception e) {
-			txn.rollback();
+			if (txn != null) {
+				txn.rollback();
+			}
 			e.printStackTrace();
 			return false;
 		}

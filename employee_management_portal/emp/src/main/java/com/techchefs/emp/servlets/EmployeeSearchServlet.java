@@ -1,9 +1,9 @@
 package com.techchefs.emp.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
@@ -27,36 +27,12 @@ public class EmployeeSearchServlet extends HttpServlet {
 
 		EmployeeDAO dao = EmployeeDAOFactory.getInstance();
 		List<EmployeeInfoBean> beans = dao.getEmployeesInfo(idValue, record);
-		
-		// req.setAttribute("emps", beans);
 
-		PrintWriter out = resp.getWriter();
-
-		if (beans == null) {
-			out.println("<HTML>");
-			out.println("<BODY>");
-			out.println("<H1><span style=\"color: green\"> Employees not Found... </span>");
-			out.println("</BODY>");
-			out.println("</HTML>");
+		if (beans != null) {
+			req.setAttribute("empList", beans);
 		}
 
-		for (EmployeeInfoBean bean : beans) {
-
-			out.println("<HTML>");
-			out.println("<BODY>");
-			out.println("<BR>");
-			out.println("<BR> <a href = '/emp/search?empId=" + bean.getId() + "&record=1'>" + bean.getId() + "</a>");
-			if (record != null) {
-				out.println("<BR> name : " + bean.getName());
-				out.println("<BR> age : " + bean.getAge());
-				out.println("<BR> email : " + bean.getEmail());
-				out.println("<BR> gender : " + bean.getGender());
-				out.println("<BR> designation : " + bean.getDesignation());
-				out.println("<BR> account no : " + bean.getAccountNumber());
-			}
-			out.println("</BODY>");
-			out.println("</HTML>");
-
-		}
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/search.jsp");
+		dispatcher.forward(req, resp);
 	}
 }
