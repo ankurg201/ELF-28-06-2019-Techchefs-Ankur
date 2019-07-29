@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>hi</title>
+    <script src="react.production.min.js"></script>
+    <script src="react-dom.production.min.js"></script>
+    <script src="babel.min.js"></script>
+</head>
+
+<body>
+
+    <div id="mydiv"></div>
+
+    <script type="text/babel">
+
+class Header extends React.Component {
+	constructor(props) {
+		super(props);
+		console.log('test', props.text);
+		this.state = {
+	        favoritecolor: props.favcol
+		};
+    }
+
+render(){
+		return (
+            <h1> my favirite color is {this.state.favoritecolor}</h1>
+        );
+	}
+}
+
+ReactDOM.render(<Header favcol="yellow" />, document.getElementById("mydiv"))
+</script>
+</body>
+
+</html>

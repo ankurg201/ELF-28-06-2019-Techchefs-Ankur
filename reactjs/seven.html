@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+
+  <title>hi</title>
+  <script src="react.production.min.js"></script>
+  <script src="react-dom.production.min.js"></script>
+  <script src="babel.min.js"></script>
+</head>
+
+<body>
+
+  <div id="root"></div>
+  <script type="text/babel">
+
+class Header extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {favoritecolor: "red"};
+    }
+
+    static getDerivedStateFromProps(props, state) {
+    return {favoritecolor: props.favcol };
+  }
+
+    changeColor = () => {
+    this.setState({favoritecolor: "blue"});
+  }
+
+  render() {
+    return (
+      <div>
+      <h1>My Favorite Color is {this.state.favoritecolor}</h1>
+      <button type="button" onClick={this.changeColor}>Change color</button>
+      </div>
+    );
+  }
+  }
+  
+  ReactDOM.render(<Header favcol="yellow"/>, document.getElementById('root'));
+
+  </script>
+
+</body>
+
+</html>

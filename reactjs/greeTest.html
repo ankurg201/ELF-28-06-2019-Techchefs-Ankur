@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>hi</title>
+<script src="react.production.min.js"></script>
+<script src="react-dom.production.min.js"></script>
+<script src="babel.min.js"></script>
+</head>
+
+<body>
+
+<div id="mydiv"></div>
+<div id="greetdiv"></div>
+
+<script type="text/babel">
+class Hello extends React.Component {
+	constructor(props) {
+		super(props);
+		console.log('test', props.text);
+		this.state = {
+			display: props.text != undefined ? props.text : "good morning"
+		};
+	}	
+	render(){
+		return <h1>hello world! {this.state.display}</h1>
+	}
+}
+
+class Greet extends React.Component {
+	constructor(props) {
+		super(props);
+		console.log('test', props.text);
+		this.state = {
+			display: props.text != undefined ? props.text : "greeting"
+		};
+	}
+	render(){
+		return <h1>hello world! {this.state.display}</h1>
+	}
+}
+		
+ReactDOM.render(<Hello />, document.getElementById("mydiv"))
+ReactDOM.render(<Greet />, document.getElementById("greetdiv"))
+</script>
+</body>
+</html>
