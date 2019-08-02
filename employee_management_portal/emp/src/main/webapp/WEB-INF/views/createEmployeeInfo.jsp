@@ -17,7 +17,7 @@
 <body style="background: lightgoldenrodyellow">
   <p class="h3" style="margin-left: 40%">EMPLOYEE INFORMATION</p>
   <hr>
-  <form action = "./createemployee" method = "Post">
+  <form action = "../employee/create" method = "Post">
     <div class="row">
       <div class="col">
         <label for="exampleInputEmail1">ID</label>
@@ -94,7 +94,7 @@
       </div>
       <div class="col">
         <label for="exampleInputEmail1">bloodgroup</label>
-        <input type="text" class="form-control" name="otherInfo.bloodgroup" placeholder="BLOOD GROUP">
+        <input type="text" class="form-control" name="otherInfo.bloodGroup" placeholder="BLOOD GROUP">
       </div>
     </div>
     <div class="row">
@@ -104,7 +104,7 @@
       </div>
       <div class="col">
         <label for="exampleInputEmail1">EMERGENCY CONTACT NAME</label>
-        <input type="text" class="form-control" name="otherInfo.emergencycontactname" placeholder="EMERGENCY CONTACT NAME">
+        <input type="text" class="form-control" name="otherInfo.emergencyContactName" placeholder="EMERGENCY CONTACT NAME">
       </div>
     </div>
     <div class="row">

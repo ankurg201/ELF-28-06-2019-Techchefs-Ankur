@@ -8,9 +8,8 @@
 <title>Document</title>
 <!-- <link rel="stylesheet" href="./font/font-awesome-4.7.0/css/font-awesome.css"> -->
 <link rel="stylesheet" href="bootstrap.css">
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
@@ -22,18 +21,17 @@
 
 		<div class="row">
 			<div class="col-md-6 offset-3 card"
-				style="background-color: lightgoldenrodyellow">
+				style="background-color:rgba(250,240,240,0.3)">
 				<div class="card-body">
 					<h4 class="text-center border-bottom">Login Form</h4>
 					<br>
 
 					<div class="row">
 						<div class="col-md-6 offset-3 text-center">
-							
-							${msg }
+							${msg}
 						</div>
 					</div>
-					<form action="../employee/login" method="post">
+					<form action="./authenticate" method="post">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="row">

@@ -1,25 +1,29 @@
 package com.techchefs.emp.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+
+import com.techchefs.emp.beans.EmployeeInfoBean;
+import com.techchefs.emp.dao.EmployeeDAO;
 
 @Controller
 @RequestMapping("/employee")
 public class EmployeeController {
 
-	@RequestMapping(path="/getMessage", method = RequestMethod.GET)
-	public ModelAndView getMessage() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("messagePage");
-		return modelAndView;
-	}
-	
-	@GetMapping("/seeMessage")
-	public ModelAndView getMessage(ModelAndView modelAndView) {
-		modelAndView.setViewName("messagePage");
-		return modelAndView;
+	@Autowired
+	@Qualifier("hibernate")
+	private EmployeeDAO employeeDAO;
+
+	@GetMapping("/search")
+	public String employeeSearch(String empId, ModelMap map) {
+		List<EmployeeInfoBean> beans = employeeDAO.getEmployeesInfoWithPattern(empId);
+		map.addAttribute("emplist", beans);
+		return "search";
 	}
 }

@@ -23,7 +23,7 @@
 			</div>
 
 			<div class="col-md-3 form-group pr-0">
-				<form action="./validate2/search">
+				<form action="../validator/validate/employee/search">
 					<input type="text" class="form-control" id="empId" name="empId"
 						placeholder="search here...">
 					<!-- <input type="hidden" name="url" value="./search"> -->
@@ -34,7 +34,7 @@
 
 			</div>
 			<div class="col-md-3">
-				<a href="../employee/logout">logout</a>
+				<a href="../login/logout">logout</a>
 			</div>
 		</div>
 		<hr>
@@ -50,6 +50,7 @@
 				${empBean.id} <br> ${empBean.name }<br>
 				${empBean.accountNumber} <br> ${empBean.designation }<br>
 				${empBean.phone} <br> ${empBean.age }<br>
+				${empBean.accountNumber}<br>
 			</div>
 			<div class="col-md-4">
 				<h5>Other Information</h5>

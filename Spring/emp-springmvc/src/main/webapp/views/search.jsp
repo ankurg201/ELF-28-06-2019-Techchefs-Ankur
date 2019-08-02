@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="java.util.List"%>
 <%@page import="com.techchefs.emp.beans.EmployeeInfoBean"%>
 <html lang="en">
 <head>
@@ -23,10 +24,9 @@
 			</div>
 
 			<div class="col-md-3 form-group pr-0">
-				<form action="./validate2/search">
+				<form action="/emp/search">
 					<input type="text" class="form-control" id="empId" name="empId"
 						placeholder="search here...">
-					<!-- <input type="hidden" name="url" value="./search"> -->
 			</div>
 			<div class="col-md-3 pl-0">
 				<button type="submit" class="btn btn-primary">Submit</button>
@@ -34,30 +34,23 @@
 
 			</div>
 			<div class="col-md-3">
-				<a href="../employee/logout">logout</a>
+				<a href="/emp/logout">logout</a>
 			</div>
 		</div>
 		<hr>
 		<div class="row">
 			<div class="col-md-12 text-center">
-				<h5>Employee information</h5>
+				<h5>Employee Ids match</h5>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-4">
-				<h6>Personal Information</h6>
-
-				${empBean.id} <br> ${empBean.name }<br>
-				${empBean.accountNumber} <br> ${empBean.designation }<br>
-				${empBean.phone} <br> ${empBean.age }<br>
-			</div>
-			<div class="col-md-4">
-				<h5>Other Information</h5>
-
-			</div>
-			<div class="col-md-4">
-				<h5>training Information</h5>
-
+				<%
+					List<EmployeeInfoBean> empList = (List<EmployeeInfoBean>) request.getAttribute("empList");
+					for(EmployeeInfoBean bean : empList){ %>
+					<a href = '/emp/employee?empId=" + bean.getId()'><%= bean.getId() %> <BR> <BR></a>
+				<%	}
+				%>
 			</div>
 		</div>
 	</div>
