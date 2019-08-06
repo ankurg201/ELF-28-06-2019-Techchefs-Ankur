@@ -9,6 +9,7 @@ import com.techchefs.hibernateMappings.bean.onetoone.EmployeeEducationPKBean;
 import com.techchefs.hibernateMappings.bean.onetoone.EmployeeExperienceInfoBean;
 import com.techchefs.hibernateMappings.bean.onetoone.EmployeeExperincePKBean;
 import com.techchefs.hibernateMappings.bean.onetoone.EmployeeOtherInfoBean;
+import com.techchefs.hibernateMappings.bean.onetoone.TrainingInfoBean;
 import com.techchefs.hibernateMappings.model.HibernateImpl;
 import com.techchefs.hibernateMappings.primary.EmployeeInfoBean;
 
@@ -16,7 +17,7 @@ public class BidirectionalApp {
 
 	public static void main(String[] args) {
 		EmployeeInfoBean infoBean = new EmployeeInfoBean();
-		infoBean.setId(4);
+		infoBean.setId(5);
 		infoBean.setName("mohit");
 		infoBean.setDesignation("md");
 
@@ -75,10 +76,24 @@ public class BidirectionalApp {
 		experienceInfoBean2.setDesignation("manager");
 		experienceInfoBean2.setExperincePKBean(experincePKBean2);
 
+		// training info bean
+		TrainingInfoBean trainingInfoBean1 = new TrainingInfoBean();
+		trainingInfoBean1.setCourseType("fulll time");
+		trainingInfoBean1.setCourseId(101);
+		trainingInfoBean1.setCourseName("java");
+		//trainingInfoBean1.setInfoBeans(Arrays.asList(infoBean));
+		
+		TrainingInfoBean trainingInfoBean2 = new TrainingInfoBean();
+		trainingInfoBean2.setCourseType("fulll time");
+		trainingInfoBean2.setCourseId(102);
+		trainingInfoBean2.setCourseName("servlet");
+		//trainingInfoBean1.setInfoBeans(Arrays.asList(infoBean));
+
 		infoBean.setOtherInfoBean(otherInfoBean);
 		infoBean.setAddressInfoBeans(Arrays.asList(addressInfoBean1, addressInfoBean2));
 		infoBean.setEducationInfoBeans(Arrays.asList(educationInfoBean1, educationInfoBean2));
 		infoBean.setExpInfoBeans(Arrays.asList(experienceInfoBean1, experienceInfoBean2));
+		infoBean.setTrainingInfoBeans(Arrays.asList(trainingInfoBean1, trainingInfoBean2));
 
 		HibernateImpl impl = new HibernateImpl();
 		impl.createEmployee2(infoBean);

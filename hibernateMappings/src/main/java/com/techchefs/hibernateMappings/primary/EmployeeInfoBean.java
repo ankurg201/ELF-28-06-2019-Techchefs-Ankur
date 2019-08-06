@@ -35,14 +35,14 @@ public class EmployeeInfoBean implements Serializable {
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "addressPKBean.infoBean")
 	private List<EmployeeAddressInfoBean> addressInfoBeans;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "educationPKBean.infoBean")
 	private List<EmployeeEducationInfoBean> educationInfoBeans;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "experincePKBean.infoBean")
 	private List<EmployeeExperienceInfoBean> expInfoBeans;
-	
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "")
+
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "infoBeans")
 	private List<TrainingInfoBean> trainingInfoBeans;
 
 	@Id
