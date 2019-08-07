@@ -1,0 +1,6 @@
+projectKey=emp-springmvc
+serverUrl=http://localhost:9000
+serverVersion=7.7.0.23042
+dashboardUrl=http://localhost:9000/dashboard?id=emp-springmvc
+ceTaskId=AWxrqad4tPY5aD0lAD18
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AWxrqad4tPY5aD0lAD18

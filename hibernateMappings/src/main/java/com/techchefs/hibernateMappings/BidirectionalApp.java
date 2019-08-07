@@ -17,7 +17,7 @@ public class BidirectionalApp {
 
 	public static void main(String[] args) {
 		EmployeeInfoBean infoBean = new EmployeeInfoBean();
-		infoBean.setId(5);
+		infoBean.setId(6);
 		infoBean.setName("mohit");
 		infoBean.setDesignation("md");
 
@@ -81,13 +81,13 @@ public class BidirectionalApp {
 		trainingInfoBean1.setCourseType("fulll time");
 		trainingInfoBean1.setCourseId(101);
 		trainingInfoBean1.setCourseName("java");
-		//trainingInfoBean1.setInfoBeans(Arrays.asList(infoBean));
+		trainingInfoBean1.setInfoBeans(Arrays.asList(infoBean));
 		
 		TrainingInfoBean trainingInfoBean2 = new TrainingInfoBean();
 		trainingInfoBean2.setCourseType("fulll time");
 		trainingInfoBean2.setCourseId(102);
 		trainingInfoBean2.setCourseName("servlet");
-		//trainingInfoBean1.setInfoBeans(Arrays.asList(infoBean));
+		trainingInfoBean1.setInfoBeans(Arrays.asList(infoBean));
 
 		infoBean.setOtherInfoBean(otherInfoBean);
 		infoBean.setAddressInfoBeans(Arrays.asList(addressInfoBean1, addressInfoBean2));

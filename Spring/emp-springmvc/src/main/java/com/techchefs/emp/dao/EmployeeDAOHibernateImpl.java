@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.techchefs.emp.beans.EmployeeInfoBean;
 
 public class EmployeeDAOHibernateImpl implements EmployeeDAO {
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -58,7 +58,8 @@ public class EmployeeDAOHibernateImpl implements EmployeeDAO {
 			txn.commit();
 			return true;
 		} catch (Exception e) {
-			txn.rollback();
+			if (txn != null)
+				txn.rollback();
 			e.printStackTrace();
 		}
 		return true;
