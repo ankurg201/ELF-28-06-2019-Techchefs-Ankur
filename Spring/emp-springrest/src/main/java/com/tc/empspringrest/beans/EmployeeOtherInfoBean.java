@@ -14,32 +14,35 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-@XmlRootElement(name="employee-other-info-bean")
-@XmlAccessorType(XmlAccessType.FIELD)
+//@XmlRootElement(name="employee-other-info-bean")
+//@XmlAccessorType(XmlAccessType.FIELD)
 @Table(name = "employee_otherinfo")
 public class EmployeeOtherInfoBean implements Serializable{
 	@Id
 	@OneToOne
 	@JoinColumn(name = "id" )
-	@XmlTransient
+	//@XmlTransient
+	@JsonIgnore
 	private EmployeeInfoBean infoBean;
 	
 	@Column(name = "pan")
 	private String pan;
-	@XmlElement(name = "is-married")
+	//@XmlElement(name = "is-married")
 	@Column(name = "ismarried")
 	private boolean isMarried;
 	@Column(name = "blood_grp")
-	@XmlElement(name = "blood-group")
+	//@XmlElement(name = "blood-group")
 	private String bloodGrp;
 	@Column(name = "ischallenged")
-	@XmlElement(name = "is-challenged")
+	//@XmlElement(name = "is-challenged")
 	private boolean isChallenged;
 	@Column(name = "emergency_contact_number")
-	@XmlElement(name = "emergency-contact-number")
+	//@XmlElement(name = "emergency-contact-number")
 	private long emergencyCN;
-	@XmlElement(name = "emergency-contact-person")
+	//@XmlElement(name = "emergency-contact-person")
 	@Column(name = "emergency_contact_person")
 	private String emergencyCP;
 	@Column(name = "nationality")
@@ -47,13 +50,13 @@ public class EmployeeOtherInfoBean implements Serializable{
 	@Column(name = "religion")
 	private String religion;
 	@Column(name = "father_nm")
-	@XmlElement(name = "father-name")
+	//@XmlElement(name = "father-name")
 	private String fatherNM;
 	@Column(name = "mother_nm")
-	@XmlElement(name = "mother-name")
+	//@XmlElement(name = "mother-name")
 	private String motherNM;
 	@Column(name = "spouse_nm")
-	@XmlElement(name = "spouse-name")
+	//@XmlElement(name = "spouse-name")
 	private String spouseNM;
 	@Column(name = "passport")
 	private String passport;

@@ -5,4 +5,7 @@ public interface EMPConstants {
 	String VIEW_LOGINPAGE = "loginPage";
 	String VIEW_HOMEPAGE = "homePage";
 	String DB_INTERACTION_TYPE="hibernate";
+	String SUCCESS_MSG="Succesfull";
+	
+	String FAILED_MSG="Failure";
 }

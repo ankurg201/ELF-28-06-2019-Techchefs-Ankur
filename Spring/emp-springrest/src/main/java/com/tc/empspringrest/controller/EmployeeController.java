@@ -4,17 +4,18 @@ import static com.tc.empspringrest.common.EMPConstants.DB_INTERACTION_TYPE;
 import static com.tc.empspringrest.common.EMPConstants.PROPERTY_FILENAME;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,16 +26,18 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.tc.empspringrest.beans.EmployeeAddressInfoBean;
 import com.tc.empspringrest.beans.EmployeeEducationInfoBean;
 import com.tc.empspringrest.beans.EmployeeExperienceInfoBean;
 import com.tc.empspringrest.beans.EmployeeInfoBean;
 import com.tc.empspringrest.beans.EmployeeOtherInfoBean;
+import com.tc.empspringrest.beans.EmployeeResponse;
+import com.tc.empspringrest.common.EMPConstants;
 import com.tc.empspringrest.dao.EmployeeDao;
 
-@Controller
+@RestController
 @RequestMapping("/employee")
 @PropertySource(PROPERTY_FILENAME)
 public class EmployeeController {
@@ -49,23 +52,62 @@ public class EmployeeController {
 		binder.registerCustomEditor(Date.class, editor);
 	}
 
-	@DeleteMapping("/removeEmployee")
-	public @ResponseBody boolean deleteEmployee(@PathVariable("id")int id) {
-		return dao.deleteEmployeeInfo(id);
+	@DeleteMapping("/removeEmployee/{id}")
+	public EmployeeResponse deleteEmployee(@PathVariable("id") int id, HttpServletRequest request) {
+		EmployeeResponse response = new EmployeeResponse();
+		if (request.getSession(false) != null) {
+			boolean result = dao.deleteEmployeeInfo(id);
+			if (result) {
+				response.setStatusCode(200);
+				response.setMessage(EMPConstants.SUCCESS_MSG);
+				response.setDescription("data deleted succesfully");
+			} else {
+				response.setStatusCode(401);
+				response.setMessage(EMPConstants.FAILED_MSG);
+				response.setDescription("data not deleted");
+			}
+			return response;
+		} else {
+			return setEmployeeResponse(response, 501, EMPConstants.FAILED_MSG, "please login first");
+		}
 	}
 
-	@GetMapping("/getEmployee")
-	public @ResponseBody EmployeeInfoBean getEmployee(@RequestParam(name = "empId") int id) {
-		return dao.getEmployeeInfo(id);
+	@GetMapping(path = "/getEmployee", produces = MediaType.APPLICATION_JSON_VALUE)
+	public EmployeeResponse getEmployee(@RequestParam(name = "empId") int id, HttpServletRequest request) {
+		EmployeeResponse response = new EmployeeResponse();
+		if (request.getSession(false) != null) {
+			EmployeeInfoBean bean = dao.getEmployeeInfo(id);
+			if (bean != null) {
+				response.setInfoBeanList(Arrays.asList(bean));
+				setEmployeeResponse(response, 201, EMPConstants.SUCCESS_MSG, "fetched successfully");
+			} else {
+				setEmployeeResponse(response, 401, EMPConstants.FAILED_MSG, "data not found");
+			}
+			return response;
+		} else {
+			return setEmployeeResponse(response, 501, EMPConstants.FAILED_MSG, "please login first");
+		}
 	}
 
-	@GetMapping("/getAllEmployee")
-	public @ResponseBody List<EmployeeInfoBean> getAllEmployee() {
-		return dao.getAllEmployeeInfo();
+	@GetMapping(path = "/getAllEmployee", produces = MediaType.APPLICATION_JSON_VALUE)
+	public EmployeeResponse getAllEmployee(HttpServletRequest request) {
+		EmployeeResponse response = new EmployeeResponse();
+		if (request.getSession(false) != null) {
+			List<EmployeeInfoBean> beans = dao.getAllEmployeeInfo();
+			if (beans != null) {
+				response.setInfoBeanList(beans);
+				setEmployeeResponse(response, 201, EMPConstants.SUCCESS_MSG, "fetched successfully");
+			} else {
+				setEmployeeResponse(response, 401, EMPConstants.FAILED_MSG, "data not found");
+			}
+			return response;
+		} else {
+			return setEmployeeResponse(response, 501, EMPConstants.FAILED_MSG, "data not found");
+		}
 	}
 
-	@PostMapping("/createEmployee")
-	public @ResponseBody boolean addEmployee(@RequestBody EmployeeInfoBean bean, ModelMap map) {
+	@PostMapping(path = "/createEmployee", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public EmployeeResponse addEmployee(@RequestBody EmployeeInfoBean bean) {
 
 		List<EmployeeEducationInfoBean> eduBeans = bean.getEducationInfoBeans();
 		for (EmployeeEducationInfoBean employeeEducationInfoBean : eduBeans) {
@@ -85,42 +127,61 @@ public class EmployeeController {
 
 		bean.setMngrId(dao.getEmployeeInfo(bean.getMngrId().getId()));
 		boolean result = dao.createEmployeeInfo(bean);
+		EmployeeResponse response = new EmployeeResponse();
 		if (result) {
-			map.addAttribute("msg", "Employee added Successfully!!!");
-			return true;
+			response.setStatusCode(200);
+			response.setMessage(EMPConstants.SUCCESS_MSG);
+			response.setDescription("data added succesfully");
+		} else {
+			response.setStatusCode(401);
+			response.setMessage(EMPConstants.FAILED_MSG);
+			response.setDescription("data not added");
 		}
-		map.addAttribute("msg", "Employee insertion failed!!!");
-		return false;
+		return response;
 
 	}
 
-	@PutMapping("/updateEmployee")
-	public @ResponseBody boolean updateEmployee(EmployeeInfoBean bean, int managerId, ModelMap map, HttpSession session) {
+	@PutMapping(path = "/updateEmployee", produces = MediaType.APPLICATION_JSON_VALUE)
+	public EmployeeResponse modifyEmployee(EmployeeInfoBean bean, HttpSession session, HttpServletRequest request) {
+		EmployeeResponse response = new EmployeeResponse();
+		if (request.getSession(false) != null) {
 
-		List<EmployeeEducationInfoBean> eduBeans = bean.getEducationInfoBeans();
-		for (EmployeeEducationInfoBean employeeEducationInfoBean : eduBeans) {
-			employeeEducationInfoBean.getEducationPKBean().setInfoBean(bean);
-		}
-		List<EmployeeAddressInfoBean> addressBeans = bean.getAddressInfoBeans();
-		for (EmployeeAddressInfoBean employeeAddressInfoBean : addressBeans) {
-			employeeAddressInfoBean.getAddressPKBean().setInfoBean(bean);
-		}
-		List<EmployeeExperienceInfoBean> expBeans = bean.getExperienceInfoBeans();
-		for (EmployeeExperienceInfoBean employeeExperienceInfoBean : expBeans) {
-			employeeExperienceInfoBean.getExperiencePKBean().setInfoBean(bean);
-		}
+			List<EmployeeEducationInfoBean> eduBeans = bean.getEducationInfoBeans();
+			for (EmployeeEducationInfoBean employeeEducationInfoBean : eduBeans) {
+				employeeEducationInfoBean.getEducationPKBean().setInfoBean(bean);
+			}
+			List<EmployeeAddressInfoBean> addressBeans = bean.getAddressInfoBeans();
+			for (EmployeeAddressInfoBean employeeAddressInfoBean : addressBeans) {
+				employeeAddressInfoBean.getAddressPKBean().setInfoBean(bean);
+			}
+			List<EmployeeExperienceInfoBean> expBeans = bean.getExperienceInfoBeans();
+			for (EmployeeExperienceInfoBean employeeExperienceInfoBean : expBeans) {
+				employeeExperienceInfoBean.getExperiencePKBean().setInfoBean(bean);
+			}
 
-		EmployeeOtherInfoBean otherInfo = bean.getOtherInfo();
-		otherInfo.setInfoBean(bean);
+			EmployeeOtherInfoBean otherInfo = bean.getOtherInfo();
+			otherInfo.setInfoBean(bean);
 
-		bean.setMngrId(dao.getEmployeeInfo(managerId));
-		boolean result = dao.updateEmployeeInfo(bean);
-		if (result) {
-			map.addAttribute("msg", "Employee updated Successfully!!!");
-			session.setAttribute("bean", bean);
-			return true;
+			bean.setMngrId(dao.getEmployeeInfo(bean.getMngrId().getId()));
+			boolean result = dao.updateEmployeeInfo(bean);
+
+			if (result) {
+				response.setStatusCode(200);
+				response.setMessage(EMPConstants.SUCCESS_MSG);
+				response.setDescription("data updated succesfully");
+			} else {
+				setEmployeeResponse(response, 401, EMPConstants.FAILED_MSG, "data not updated");
+			}
+			return response;
+		} else {
+			return setEmployeeResponse(response, 501, EMPConstants.FAILED_MSG, "please login first");
 		}
-		map.addAttribute("msg", "Employee updation failed!!!");
-		return false;
+	}
+
+	private EmployeeResponse setEmployeeResponse(EmployeeResponse response, int statusCode, String msg, String desc) {
+		response.setStatusCode(200);
+		response.setMessage(msg);
+		response.setDescription(desc);
+		return response;
 	}
 }

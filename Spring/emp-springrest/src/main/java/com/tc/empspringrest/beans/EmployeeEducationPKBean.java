@@ -6,11 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -24,6 +19,7 @@ import lombok.Data;
 //@XmlRootElement(name = "employee-education-pk")
 @JsonRootName(value = "employee-education-pk")
 //@XmlAccessorType(XmlAccessType.FIELD)
+@Data
 public class EmployeeEducationPKBean implements Serializable{
 
 	@JoinColumn(name = "id")
@@ -35,17 +31,4 @@ public class EmployeeEducationPKBean implements Serializable{
 	//@XmlElement(name="educational-type")
 	@JsonProperty(value = "educational-type")
 	private String educationalType;
-	public EmployeeInfoBean getInfoBean() {
-		return infoBean;
-	}
-	public void setInfoBean(EmployeeInfoBean infoBean) {
-		this.infoBean = infoBean;
-	}
-	public String getEducationalType() {
-		return educationalType;
-	}
-	public void setEducationalType(String educationalType) {
-		this.educationalType = educationalType;
-	}
-	
 }

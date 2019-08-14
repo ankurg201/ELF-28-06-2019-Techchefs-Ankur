@@ -12,33 +12,26 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 import lombok.Data;
 
 
 @SuppressWarnings("serial")
 @Embeddable
-@XmlRootElement(name = "employee-experience-pk")
-@XmlAccessorType(XmlAccessType.FIELD)
+//@XmlRootElement(name = "employee-experience-pk")
+//@XmlAccessorType(XmlAccessType.FIELD)
+@JsonRootName(value = "employee-experience-pk")
+@Data
 public class EmployeeExperiencePKBean implements Serializable{
 
 	@JoinColumn(name = "id")
 	@ManyToOne
-	@XmlTransient
+	//@XmlTransient
+	@JsonIgnore
 	private EmployeeInfoBean infoBean;
 	@Column(name = "company_name")
-	@XmlElement(name="company-name")
+	//@XmlElement(name="company-name")
 	private String companyName;
-	public EmployeeInfoBean getInfoBean() {
-		return infoBean;
-	}
-	public void setInfoBean(EmployeeInfoBean infoBean) {
-		this.infoBean = infoBean;
-	}
-	public String getCompanyName() {
-		return companyName;
-	}
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
-	
 }
