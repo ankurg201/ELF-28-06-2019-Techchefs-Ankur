@@ -13,4 +13,5 @@ public class Response {
 	
 	private List<User> users;
 	private List<BookAllotment> bookAllotments;
+	private List<Book> books;
 }

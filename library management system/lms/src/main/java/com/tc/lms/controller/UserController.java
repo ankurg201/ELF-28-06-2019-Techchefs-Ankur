@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tc.lms.beans.Book;
 import com.tc.lms.beans.BookAllotment;
 import com.tc.lms.beans.Response;
 import com.tc.lms.beans.User;
 import com.tc.lms.common.UserConstants;
 import com.tc.lms.repository.BookAllotmentRepository;
+import com.tc.lms.repository.BookRepository;
 import com.tc.lms.repository.UserRepository;
 
 @RestController
@@ -27,6 +29,9 @@ public class UserController {
 
 	@Autowired
 	private BookAllotmentRepository bookAllotmentRepository;
+
+	@Autowired
+	private BookRepository bookRepository;
 
 	@GetMapping(path = "/alluser", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Response getAllUser() {
@@ -50,6 +55,19 @@ public class UserController {
 		}
 		response.setBookAllotments(Arrays.asList(bookAllotmentBean));
 		return setResponse(response, 201, UserConstants.SUCCESS_MSG, "book allotment request succesful");
+	}
+
+	@GetMapping(path = "/searchBook", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Response searchBook(String bookSearch) {
+		Response response = new Response();
+		List<Book> books = bookRepository.findByNameContaining(bookSearch);
+		if (books != null) {
+			response.setBooks(books);
+			setResponse(response, 201, UserConstants.SUCCESS_MSG, "search book by category succesful");
+		} else {
+			return setResponse(response, 401, UserConstants.FAILED_MSG, "book not found failed");
+		}
+		return response;
 	}
 
 	private Response setResponse(Response response, Integer statusCode, String msg, String desc) {

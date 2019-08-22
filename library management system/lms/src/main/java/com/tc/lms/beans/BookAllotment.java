@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import lombok.Data;
@@ -26,11 +24,9 @@ public class BookAllotment implements Serializable{
 	
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JsonIgnoreProperties({"isbn","author","category","price", "bookCount", "image"})
 	private User user;
 	@JoinColumn(name = "book_id", referencedColumnName = "id")
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JsonIgnoreProperties({"password","userType","rollNo","phone", "email", "address", "image"})
 	private Book book;
 	
 	@Id
