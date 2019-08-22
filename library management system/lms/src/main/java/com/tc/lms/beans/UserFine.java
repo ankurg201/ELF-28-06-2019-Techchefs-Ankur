@@ -34,4 +34,36 @@ public class UserFine implements Serializable{
 	private String fineDesc;
 	@Column(name = "payment_status")
 	private String paymentStatus;
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public Float getFine() {
+		return fine;
+	}
+	public void setFine(Float fine) {
+		this.fine = fine;
+	}
+	public String getFineDesc() {
+		return fineDesc;
+	}
+	public void setFineDesc(String fineDesc) {
+		this.fineDesc = fineDesc;
+	}
+	public String getPaymentStatus() {
+		return paymentStatus;
+	}
+	public void setPaymentStatus(String paymentStatus) {
+		this.paymentStatus = paymentStatus;
+	}
+	
+	
 }
